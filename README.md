@@ -16,9 +16,12 @@ moment of that switch:
 
 ![Indoor to outdoor transition](docs/093_transition_preview.gif)
 
-**▶ [Full comparison video, all 2191 frames](docs/093_original_vs_segmentation.mp4)**
-*(`docs/093_original_vs_segmentation.mp4` — 73 s, 5.5 MB. The archival render is 2048×856; the
-copy in this repo is downscaled to 1024×428 to keep the clone small.)*
+**▶ [Full comparison video, all 2191 frames](docs/093_original_vs_segmentation.mp4)** — 73 s,
+1024 × 428, 5.5 MB, in this repo.
+
+**▶ [Full-resolution render (2048 × 856, 90 MB)](https://drive.google.com/drive/folders/1jSh9xU82g6IQ3tPfcU-pAIANSwnkxuPX?usp=sharing)**
+— in the Drive folder alongside the weights. This is the original render at the
+model's native output geometry; the in-repo copy above is downscaled to keep clones small.
 
 Top panel is the source frame, bottom is the segmentation overlay. The border and its label
 carry the indoor/outdoor decision (green = outdoor, red = indoor) along with the sky fraction
