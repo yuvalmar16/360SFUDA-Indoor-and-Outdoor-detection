@@ -1,0 +1,21 @@
+# Model weights live in Google Drive - see README.
+weights/*
+!weights/.gitkeep
+*.pth
+*.pt
+
+# Run outputs
+output/
+results/
+*.mp4
+!docs/*.mp4
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

@@ -1,0 +1,13 @@
+# Verified working set (Python 3.9, CUDA 11.3, NVIDIA T4).
+#
+# torch / torchvision are NOT installed from this file - they need the cu113 index.
+# See the README's Installation section for the full ordered procedure.
+
+numpy==1.26.4
+opencv-python==4.7.0.72
+timm==1.0.22
+
+# mmcv-full supplies mmcv.cnn.ConvModule, used by models/segformer/seghead.py.
+# It must match the torch + CUDA build; install it from the openmmlab wheel index
+# (see README) rather than from PyPI, which would try to compile it from source.
+mmcv-full==1.4.0
