@@ -119,7 +119,7 @@ print(torch.__version__, torch.cuda.is_available(), cv2.__version__, timm.__vers
 The trained weights are **not in this repository**. Download them from Google Drive and place
 them in a `weights/` folder:
 
-> **Download:** https://drive.google.com/drive/folders/1xH93Qk2Bn03iFqIqazmHOxEOXs-0lHf2
+> **Download:** https://drive.google.com/drive/folders/1jSh9xU82g6IQ3tPfcU-pAIANSwnkxuPX?usp=sharing
 
 ```
 weights/
