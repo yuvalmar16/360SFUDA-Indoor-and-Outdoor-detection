@@ -8,18 +8,36 @@ This repository is the **segmentation and indoor/outdoor component only**. It co
 GPS handling, no visual odometry, and no map building — it takes a 360° video in and produces
 masks, an indoor/outdoor timeline, and rendered video out.
 
-![Outdoor frame](docs/sample_outdoor.jpg)
+## Demo
+
+Video 093 — a 73-second walk that starts inside a building and exits onto a campus plaza. The
+detector holds INDOOR for frames 0–879 and switches to OUTDOOR at frame 880. This clip is the
+moment of that switch:
+
+![Indoor to outdoor transition](docs/093_transition_preview.gif)
+
+**▶ [Full comparison video, all 2191 frames](docs/093_original_vs_segmentation.mp4)**
+*(`docs/093_original_vs_segmentation.mp4` — 73 s, 5.5 MB. The archival render is 2048×856; the
+copy in this repo is downscaled to 1024×428 to keep the clone small.)*
 
 Top panel is the source frame, bottom is the segmentation overlay. The border and its label
 carry the indoor/outdoor decision (green = outdoor, red = indoor) along with the sky fraction
 that drove it; the legend lists only the classes actually present in that frame. The strip along
-the bottom is the whole clip's indoor/outdoor timeline with a playhead.
+the bottom is the whole clip's indoor/outdoor timeline, red for indoor and green for outdoor,
+with a white tick at each transition and a playhead tracking the current frame.
+
+Two frames from the same clip, at full render resolution:
+
+![Outdoor frame](docs/sample_outdoor.jpg)
+
+Outdoors, 40 seconds in. Sky at 22.8%, and the full outdoor class set is in play.
 
 ![Indoor frame](docs/sample_indoor.jpg)
 
-The same clip 23 seconds earlier, indoors. Note the class legend collapses to the indoor set —
-road, sidewalk, terrain and vehicle are suppressed indoors by design (see *Indoor surface
-cleaning* below).
+The same walk 23 seconds earlier, indoors. The class legend has collapsed to the indoor set —
+road, sidewalk, terrain and vehicle are suppressed indoors by design (see *State-dependent
+cleaning* below). Sky still reads 10.9% here, from the bright windows; this is exactly the case
+the hysteresis and the raised indoor sky-confidence threshold exist to survive.
 
 ---
 
@@ -101,12 +119,23 @@ print(torch.__version__, torch.cuda.is_available(), cv2.__version__, timm.__vers
 The trained weights are **not in this repository**. Download them from Google Drive and place
 them in a `weights/` folder:
 
-> **Download:** `<PUT YOUR GOOGLE DRIVE LINK HERE>`
+> **Download:** https://drive.google.com/drive/folders/1xH93Qk2Bn03iFqIqazmHOxEOXs-0lHf2
 
 ```
 weights/
 ├── city_b2_52.99.pth    # MiT-B2, 98 MB   <- default, use this
 └── city_b1_50.19.pth    # MiT-B1, 56 MB   (smaller/faster backbone)
+```
+
+Checksums, to confirm the download arrived intact:
+
+| File | Size (bytes) | MD5 |
+|---|---|---|
+| `city_b2_52.99.pth` | 103,302,919 | `c9c35ed6d32ddb3d74cce816c5c56373` |
+| `city_b1_50.19.pth` | 59,063,807 | `9866e33c12304a722f3d6bf7487be8a7` |
+
+```bash
+md5sum weights/*.pth
 ```
 
 The filename encodes the backbone and its mIoU on the evaluation set. The `--weights` flag is
